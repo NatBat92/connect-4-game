@@ -40,8 +40,8 @@ class GameBoard():
         """
         creates the turns and the symbols of each player
         """
-        players = ['#', '@']
-        return players[self.turn % 2]
+        players_symbols = ['#', '@']
+        return players_symbols[self.turn % 2]
 
     def player_go(self, column):
         """
@@ -103,7 +103,7 @@ class GameBoard():
         for a in range(0, 7, 2):
             if win_directions[a][1] + win_directions[a+1][1] >= 3:
                 self.print_board()
-                print(f"Player {Player.count} is the winner!")
+                print(f"{last_symbol} is the winner!")
                 return last_symbol
 
         # no win found
@@ -133,3 +133,58 @@ class Player():
         self.won_games = 0
 
         Player.count += 1
+
+
+def introduce_players():
+    """
+    Gives and introduction to the players and the symbols that
+    belong to each person
+    """
+    print(f"{player_one.name} and {player_two.name} are playing")
+    print("\n")
+    print(f"{player_one.name} = #      {player_two.name} = @")
+
+
+def play_game():
+    """
+    Runs the game and checks for a win at the end
+    """
+    game = GameBoard()
+    game_over = False
+    while not game_over:
+        # Game to continue
+
+        game.print_board()
+
+        valid_drop = False
+        while not valid_drop:
+            player_move = input(f"{game.turns()} 's turn, "
+                                f"please pick a column 1-7: ")
+            try:
+                valid_drop = game.player_go(int(player_move)-1)
+            except ValueError():
+                print("Please choose a number between 1 and 7")
+
+        game_over = game.check_for_win()
+
+        if not any(' ' in x for x in game.board):
+            print("This game is a draw...")
+            return
+
+
+if __name__ == '__main__':
+    players = []
+    player_one = Player()
+    players.append(player_one)
+
+    player_two = Player()
+    players.append(player_two)
+    introduce_players()
+    play_game()
+
+    PLAY_AGAIN = str(input("do you want to play again? "
+                           "(type 'y' for yes and 'n' for no): "))
+    if PLAY_AGAIN == 'y':
+        play_game()
+    else:
+        print("thank you for playing!")
