@@ -85,3 +85,51 @@ class GameBoard():
             [[-1, 1], 0, True],
             [[1, -1], 0, True],
         ]
+
+        # search all directions 4 spaces for matching symbols
+        for b in range(4):
+            for m in win_directions:
+                j = last_row + (m[0][0] * (b+1))
+                i = last_column + (m[0][1] * (b+1))
+
+                if m[2] and self.in_grid(j, i) and self.board[j][i]\
+                   == last_symbol:
+                    m[1] += 1
+                else:
+                    # Stop searching that direction
+                    m[2] = False
+
+        # Check possible direction pairs for '4 in a row'
+        for a in range(0, 7, 2):
+            if win_directions[a][1] + win_directions[a+1][1] >= 3:
+                self.print_board()
+                print(f"Player {Player.count} is the winner!")
+                return last_symbol
+
+        # no win found
+        return False
+
+
+class Player():
+    """
+    Defines the players and asks for name input
+    """
+    count = 1
+
+    def __init__(self):
+        name = input(f"Please enter a name for Player {Player.count}: ")
+
+        while True:
+            try:
+                if not isinstance(name, str) or name.isnumeric():
+                    raise ValueError
+                break
+            except ValueError:
+                print("Please enter a valid name (only letters are allowed)")
+                name = input(f"Please enter a name for"
+                             f"Player {Player.count}: ")
+
+        self.name = name
+        self.won_games = 0
+
+        Player.count += 1
