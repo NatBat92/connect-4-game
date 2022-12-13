@@ -104,6 +104,12 @@ class GameBoard():
             if win_directions[a][1] + win_directions[a+1][1] >= 3:
                 self.print_board()
                 print(f"{last_symbol} is the winner!")
+                play_again = str(input("do you want to play again? "
+                                       "(type 'y' for yes and 'n' for no): "))
+                if play_again == 'y':
+                    play_game()
+                else:
+                    print("thank you for playing!")
                 return last_symbol
 
         # no win found
@@ -162,7 +168,7 @@ def play_game():
                                 f"please pick a column 1-7: ")
             try:
                 valid_drop = game.player_go(int(player_move)-1)
-            except ValueError():
+            except IndexError:
                 print("Please choose a number between 1 and 7")
 
         game_over = game.check_for_win()
@@ -181,10 +187,3 @@ if __name__ == '__main__':
     players.append(player_two)
     introduce_players()
     play_game()
-
-    PLAY_AGAIN = str(input("do you want to play again? "
-                           "(type 'y' for yes and 'n' for no): "))
-    if PLAY_AGAIN == 'y':
-        play_game()
-    else:
-        print("thank you for playing!")
