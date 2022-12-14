@@ -48,7 +48,6 @@ class GameBoard():
         determines the go has been completed by searching the column
         that was chosen for a change
         """
-        # Search from the bottom of the column up
         for k in range(BOARD_ROWS-1, -1, -1):
             if self.board[k][column] == ' ':
                 self.board[k][column] = self.turns()
@@ -74,7 +73,6 @@ class GameBoard():
         last_column = self.last_move[1]
         last_symbol = self.board[last_row][last_column]
 
-        # [i, j] direction, matching symbol count
         win_directions = [
             [[-1, 0], 0, True],
             [[1, 0], 0, True],
@@ -96,7 +94,7 @@ class GameBoard():
                    == last_symbol:
                     m[1] += 1
                 else:
-                    # Stop searching that direction
+                    # Stop searching that direction if a win isn't found
                     m[2] = False
 
         # Check possible direction pairs for '4 in a row'
@@ -136,7 +134,6 @@ class Player():
                              f"Player {Player.count}: ")
 
         self.name = name
-        self.won_games = 0
 
         Player.count += 1
 
