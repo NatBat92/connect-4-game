@@ -167,11 +167,13 @@ def play_game():
                 valid_drop = game.player_go(int(player_move)-1)
             except IndexError:
                 print("Please choose a number between 1 and 7")
+            except ValueError:
+                print("Please choose a number between 1 and 7")
 
         game_over = game.check_for_win()
 
         if not any(' ' in x for x in game.board):
-            print("This game is a draw...")
+            print("This is a tie")
             return
 
 
