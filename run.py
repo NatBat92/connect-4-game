@@ -125,7 +125,7 @@ class Player():
 
         while True:
             try:
-                if not isinstance(name, str) or name.isnumeric():
+                if not isinstance(name, str) or name.isnumeric() or name == "":
                     raise ValueError
                 break
             except ValueError:
