@@ -119,6 +119,7 @@ class Player():
     """
     Gets player name input
     """
+    print(f.renderText('Connect 4'))
     player_one_name = pyip.inputStr(prompt="Enter the name for player 1: ",
                                     blank=False, blockRegexes=[r'([0-9])'])
 
@@ -154,6 +155,5 @@ def play_game():
 
 
 if __name__ == '__main__':
-    print(f.renderText('Connect 4'))
     Player()
     play_game()
