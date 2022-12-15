@@ -125,8 +125,7 @@ class Player():
     player_two_name = pyip.inputStr(prompt="Enter the name for player 2: ",
                                     blank=False, blockRegexes=[r'([0-9])'])
     print("\n")
-    print(f"{player_one_name} = '#'")
-    print(f"{player_two_name} = '@'", "\n")
+    print(f"{player_one_name} = '#'         {player_two_name} = '@'", "\n")
 
 
 def play_game():
