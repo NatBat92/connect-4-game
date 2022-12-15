@@ -48,12 +48,12 @@ To play this game:
 ### Future Features
 
 * Use colours so players can choose a colour token instead of a character
-* Have an AI player
+* Have an AI player instead of the need for 2 human players
 * Implement a score system
 
 ## Data Model
 
-I decided to use a gameboard class as my model for this project. The game creates the board and will store the players move in the relevant position.
+I decided to use a gameboard class and a player class as my model for this project. The game creates the board and will store the players move in the relevant position.
 
 The gameboard class holds the way the game board looks (rows/ columns) and ceates the spacing between the different columns. The class also holds the user tokens and the players turns. The class also holds various methods that will print out the board to the console on each turn with the updated board that shows the previous players move. This also holds the method that the game uses to determine the winner and methods that catch various errors such as invalid moves to outside the game grid.
 
@@ -70,10 +70,11 @@ The gameboard class holds the way the game board looks (rows/ columns) and ceate
 ### Solved Bugs
 
 * Had an issue with the game not replaying more than once when the first round was complete. This was due to the bit of code that did that was inside the wrong function
+* Found a problem where the player could input 0 or a negative number for their turn. I downloaded a library pyinputplus to be able to fix the issue
 
 ## Unsolved Bugs
 
-* Only issue left that I have found is that you can enter the number 0 and it will place a token in column 7
+* No unsolved bugs that I'm aware of.
 
 ## Deplyment
 
@@ -87,4 +88,8 @@ The gameboard class holds the way the game board looks (rows/ columns) and ceate
 
 * WikiHow for the step by step on what I needed to follow to get the game to function like the actual game - [WikiHow](https://www.wikihow.com/Play-Connect-4)
 * WikiBooks for error handling - [WikiBooks](https://en.wikibooks.org/wiki/Python_Programming/Errors#:~:text=In%20python%20there%20are%20three,errors%2C%20logic%20errors%20and%20exceptions.)
+* Pyinputplus to catch incorrect input instead of needing to use lots of value/ index error exceptions - [Pyinputplus](https://pypi.org/project/PyInputPlus/)
+* Pwaller/ Pyfiglet for the title when the game is loaded [pyfiglet on github](https://github.com/pwaller/pyfiglet)
+* My mentor Andre Aquilina for his help in finding the bugs in my code
+* Code Institute for the code template that I have used for this project
 

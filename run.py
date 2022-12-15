@@ -1,6 +1,7 @@
-"""
-Terminal Based connect 4 game
-"""
+import pyinputplus as pyip
+from pyfiglet import Figlet
+f = Figlet(font='5lineoblique')
+
 
 BOARD_ROWS = 6
 BOARD_COLUMNS = 7
@@ -116,36 +117,16 @@ class GameBoard():
 
 class Player():
     """
-    Defines the players and asks for name input
+    Gets player name input
     """
-    count = 1
+    player_one_name = pyip.inputStr(prompt="Enter the name for player 1: ",
+                                    blank=False, blockRegexes=[r'([0-9])'])
 
-    def __init__(self):
-        name = input(f"Please enter a name for Player {Player.count}: ")
-
-        while True:
-            try:
-                if not isinstance(name, str) or name.isnumeric() or name == "":
-                    raise ValueError
-                break
-            except ValueError:
-                print("Please enter a valid name (only letters are allowed)")
-                name = input(f"Please enter a name for"
-                             f"Player {Player.count}: ")
-
-        self.name = name
-
-        Player.count += 1
-
-
-def introduce_players():
-    """
-    Gives and introduction to the players and the symbols that
-    belong to each person
-    """
-    print(f"{player_one.name} and {player_two.name} are playing")
+    player_two_name = pyip.inputStr(prompt="Enter the name for player 2: ",
+                                    blank=False, blockRegexes=[r'([0-9])'])
     print("\n")
-    print(f"{player_one.name} = #      {player_two.name} = @")
+    print(f"{player_one_name} = '#'")
+    print(f"{player_two_name} = '@'", "\n")
 
 
 def play_game():
@@ -161,14 +142,10 @@ def play_game():
 
         valid_drop = False
         while not valid_drop:
-            player_move = input(f"{game.turns()} 's turn, "
-                                f"please pick a column 1-7: ")
-            try:
-                valid_drop = game.player_go(int(player_move)-1)
-            except IndexError:
-                print("Please choose a number between 1 and 7")
-            except ValueError:
-                print("Please choose a number between 1 and 7")
+            player_move = pyip.inputInt(f"{game.turns()} 's turn, "
+                                        f"please pick a column 1-7: ",
+                                        blank=False, min=1, max=7)
+            valid_drop = game.player_go(int(player_move)-1)
 
         game_over = game.check_for_win()
 
@@ -178,11 +155,6 @@ def play_game():
 
 
 if __name__ == '__main__':
-    players = []
-    player_one = Player()
-    players.append(player_one)
-
-    player_two = Player()
-    players.append(player_two)
-    introduce_players()
+    print(f.renderText('Connect 4'))
+    Player()
     play_game()
